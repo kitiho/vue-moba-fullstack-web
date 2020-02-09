@@ -4,14 +4,19 @@
     <el-form label-width="100px" @submit.native.prevent="save">
       <el-form-item label="文章所属分类">
         <el-select v-model="model.categories" multiple>
-          <el-option v-for="item in categories" :key="item._id" :label="item.name" :value="item._id"></el-option>
+          <el-option
+            v-for="item in categories"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="标题">
         <el-input v-model="model.title"></el-input>
       </el-form-item>
       <el-form-item label="详情">
-        <el-input v-model="model.body"></el-input>
+        <VueEditor />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
@@ -21,10 +26,12 @@
 </template>
 
 <script>
+import { VueEditor } from "vue2-editor";
 export default {
   props: {
     id: {}
   },
+  components: { VueEditor },
   data() {
     return {
       model: {},
@@ -35,7 +42,10 @@ export default {
     async save() {
       let res;
       if (this.id) {
-        const res = await this.$http.put(`rest/articles/${this.id}`, this.model);
+        const res = await this.$http.put(
+          `rest/articles/${this.id}`,
+          this.model
+        );
       } else {
         const res = await this.$http.post("rest/articles", this.model);
       }
