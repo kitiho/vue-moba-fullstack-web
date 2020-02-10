@@ -24,7 +24,10 @@ export default {
     };
   },
   methods: {
-    login() {}
+    login() {
+      const res = this.$http.post("login", this.model);
+      console.log(res.data);
+    }
   }
 };
 </script>
