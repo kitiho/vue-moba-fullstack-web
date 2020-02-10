@@ -24,9 +24,15 @@ export default {
     };
   },
   methods: {
-    login() {
-      const res = this.$http.post("login", this.model);
-      console.log(res.data);
+    async login() {
+      const res = await this.$http.post("login", this.model);
+
+      localStorage.token = res.data.token;
+      this.$router.push("/");
+      this.$message({
+        type: "success",
+        message: "登录成功"
+      });
     }
   }
 };
