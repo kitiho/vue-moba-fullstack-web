@@ -6,6 +6,8 @@ module.exports = app => {
 
     const AdminUser = require('../../models/AdminUser')
 
+    const assert = require('http-assert')
+
     const router = express.Router({
         mergeParams: true
     })
@@ -43,8 +45,11 @@ module.exports = app => {
     //资源列表
     router.get('/', async (req, res, next) => {
         const token = String(req.headers.authorization || '').split(' ').pop()
-        const {id} = jwt.verify(token, app.get('secret'))
+        assert(token,401,'请先登录')
+        const { id } = jwt.verify(token, app.get('secret'))
+        assert(id,401,'请先登录')
         req.user = await AdminUser.findById(id)
+        assert(req.user,401,'请先登录')
         await next()
     }, async (req, res) => {
 
@@ -88,22 +93,15 @@ module.exports = app => {
     app.post('/admin/api/login', async (req, res) => {
         const { username, password } = req.body
         //根据用户名找用户
-        
+
         const user = await AdminUser.findOne({ username }).select('+password')
-        if (!user) {
-            return res.status(422).send({
-                message: '用户不存在',
-            })
-        }
+        assert(user, 422, '用户不存在')
+
 
         //校验密码
         const isValid = require('bcrypt').compareSync(password, user.password)
+        assert(isValid, 422, '密码错误')
 
-        if (!isValid) {
-            return res.status(422).send({
-                message: '密码错误'
-            })
-        }
 
         //返回token
         const jwt = require('jsonwebtoken')
@@ -111,5 +109,13 @@ module.exports = app => {
             id: user._id,
         }, app.get('secret'))
         res.send({ token })
+    })
+
+    //错误处理函数
+    app.use(async (err, req, res, next) => {
+        // console.log(err);
+        res.status(err.statusCode || 500).send({
+            message: err.message
+        })
     })
 }

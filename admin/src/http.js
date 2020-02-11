@@ -1,12 +1,16 @@
 import axios from 'axios'
 import Vue from 'vue'
+import router from './router'
 const http = axios.create({
     baseURL: 'http://localhost:3000/admin/api'
 })
 
 http.interceptors.request.use(function (config) {
     // Do something before request is sent
-    config.headers.Authorization = 'Bearer ' + localStorage.token
+    if(localStorage.token){
+
+        config.headers.Authorization = 'Bearer ' + (localStorage.token || '')
+    }
     return config;
 }, function (error) {
     // Do something with request error
@@ -21,6 +25,9 @@ http.interceptors.response.use(res => {
             message: err.response.data.message,
             type: 'error'
         })
+        if(err.response.status === 401){
+            router.push('/login')
+        } 
     }
     return Promise.reject(err)
 })
