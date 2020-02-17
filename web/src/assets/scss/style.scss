@@ -116,11 +116,22 @@ a {
 
 //nav
 .nav {
+  display: flex;
   .nav-item {
     border-bottom: 3px solid transparent;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.2rem;
+    color: map-get($map: $colors, $key: "dark");
     &.active {
-      border-bottom: 3px solid #fff;
+      color: map-get($map: $colors, $key: "primary");
+      border-bottom: 3px solid map-get($map: $colors, $key: "primary");
+    }
+  }
+  &.nav-inverse {
+    .nav-item {
+      color: map-get($map: $colors, $key: "white");
+      &.active{
+        border-bottom: 3px solid map-get($map: $colors, $key: "white");
+      }
     }
   }
 }
@@ -135,9 +146,19 @@ a {
     height: 1.5385rem;
     background-position: 63.546% 15.517%;
   }
-  &.sprite-arrow{
+  &.sprite-arrow {
     width: 0.7692rem;
     height: 0.7692rem;
     background-position: 38.577% 52.076%;
+  }
+  &.sprite-info {
+    width: 1rem;
+    height: 1rem;
+    background-position: 0.138% 50.452%;
+  }
+  &.sprite-menu {
+    width: 1.3846rem;
+    height: 0.9231rem;
+    background-position: 47.619% 56.305%;
   }
 }
