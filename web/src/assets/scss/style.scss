@@ -1,4 +1,4 @@
-@import './variables';
+@import "./variables";
 //reset
 * {
   box-sizing: border-box;
@@ -54,7 +54,9 @@ a {
 .flex-column {
   flex-direction: column;
 }
-
+.flex-wrap {
+  flex-wrap: wrap;
+}
 @each $key, $value in $flex-jc {
   .jc-#{$key} {
     justify-content: $value;
@@ -72,7 +74,6 @@ a {
 .flex-grow-1 {
   flex-grow: 1;
 }
-
 
 @each $typeKey, $type in $spacing-types {
   //.m-0{margin:0}
@@ -121,5 +122,22 @@ a {
     &.active {
       border-bottom: 3px solid #fff;
     }
+  }
+}
+
+//sprite
+.sprite {
+  background: url(../images/sprite.png) no-repeat 0 0;
+  background-size: 28.8462rem;
+  display: inline-block;
+  &.sprite-news {
+    width: 1.7692rem;
+    height: 1.5385rem;
+    background-position: 63.546% 15.517%;
+  }
+  &.sprite-arrow{
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
   }
 }

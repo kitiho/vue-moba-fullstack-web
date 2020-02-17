@@ -4,12 +4,14 @@ $colors: (
   "info": #4b67af,
   "white": #fff,
   "light": #f9f9f9,
+  "light-1": #d4d9de,
   "grey-1": #666,
   "grey": #999,
   "black": #000,
   "dark": #222,
   "dark-1": #343440
 );
+$border-color: map-get($map: $colors, $key:'light-1' );
 
 // font size
 $base-font-size: 1rem;
