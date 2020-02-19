@@ -45,10 +45,36 @@
       </div>
     </div>
     <!-- end of nav icons -->
-    <m-list-card icon="info" title="英雄列表" :categories="newsCats"></m-list-card>
-    <m-card icon='info' title="英雄列表"></m-card>
-    <m-card icon='info' title="精彩视频"></m-card>
-    <m-card icon='info' title="图文攻略"></m-card>
+    <m-list-card
+      icon="info"
+      title="新闻资讯"
+      :categories="newsCats"
+    >
+      <template #items="{category}">
+        <div
+          class="py-2"
+          v-for="(news,i) in category.newsList"
+          :key="i"
+        >
+          <span>[{{news.categoryName}}]</span>
+          <span>|</span>
+          <span>{{news.title}}</span>
+          <span>{{news.data}}</span>
+        </div>
+      </template>
+    </m-list-card>
+    <m-card
+      icon='info'
+      title="英雄列表"
+    ></m-card>
+    <m-card
+      icon='info'
+      title="精彩视频"
+    ></m-card>
+    <m-card
+      icon='info'
+      title="图文攻略"
+    ></m-card>
   </div>
 </template>
 
@@ -56,48 +82,48 @@
 export default {
   data() {
     return {
-        newsCats:[
-            {
-                name:'热门',
-                newsList:new Array(5).fill(1).map(v=>({
-                    categoryName:'公告',
-                    title:'王者营地2月14日-15日登录异常说明公告',
-                    data:'02/16'
-                }))
-            },
-            {
-                name:'新闻',
-                newsList:new Array(5).fill(1).map(v=>({
-                    categoryName:'公告',
-                    title:'王者营地2月14日-15日登录异常说明公告',
-                    data:'02/16'
-                }))
-            },
-            {
-                name:'新闻',
-                newsList:new Array(5).fill(1).map(v=>({
-                    categoryName:'公告',
-                    title:'王者营地2月14日-15日登录异常说明公告',
-                    data:'02/16'
-                }))
-            },
-            {
-                name:'新闻',
-                newsList:new Array(5).fill(1).map(v=>({
-                    categoryName:'公告',
-                    title:'王者营地2月14日-15日登录异常说明公告',
-                    data:'02/16'
-                }))
-            },
-            {
-                name:'新闻',
-                newsList:new Array(5).fill(1).map(v=>({
-                    categoryName:'公告',
-                    title:'王者营地2月14日-15日登录异常说明公告',
-                    data:'02/16'
-                }))
-            },
-        ],
+      newsCats: [
+        {
+          name: "热门",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "公告",
+            title: "王者营地2月14日-15日登录异常说明公告",
+            data: "02/16"
+          }))
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "公告",
+            title: "王者营地2月14日-15日登录异常说明公告",
+            data: "02/16"
+          }))
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "公告",
+            title: "王者营地2月14日-15日登录异常说明公告",
+            data: "02/16"
+          }))
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "公告",
+            title: "王者营地2月14日-15日登录异常说明公告",
+            data: "02/16"
+          }))
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill(1).map(v => ({
+            categoryName: "公告",
+            title: "王者营地2月14日-15日登录异常说明公告",
+            data: "02/16"
+          }))
+        }
+      ],
       swiperOption: {
         pagination: {
           el: ".pagination-home"
